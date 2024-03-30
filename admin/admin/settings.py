@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,11 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'products'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -71,15 +74,18 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'admin',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -99,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -109,14 +114,16 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
+CORS_ORIGIN_ALLOW_ALL = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
